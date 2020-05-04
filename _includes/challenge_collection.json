@@ -3,32 +3,32 @@
     {% assign current_page = page.page | default: 1 -%}
     {% assign for_offset = current_page | minus:1 | times:page_size -%}
     {% assign for_count = 0 -%}
-    "title": {{ page.title | default: "Questions" | jsonify }},
+    "title": {{ page.title | default: "Challenges" | jsonify }},
     "path": {{ page.path | jsonify }},
     "page": {{ current_page }},
     "value": [
-        {% capture questions_where_exp %}question.topics contains '{{ page.topic | default: site.topic }}'{% endcapture -%}
-        {% assign questions = site.questions | where_exp: "question", questions_where_exp -%}
-        {% for question in questions limit:page_size offset:for_offset -%}
+        {% capture challenges_where_exp %}challenge.topics contains '{{ page.topic | default: site.topic }}'{% endcapture -%}
+        {% assign challenges = site.challenges | where_exp: "challenge", challenges_where_exp -%}
+        {% for challenge in challenges limit:page_size offset:for_offset -%}
         {
             {% if forloop.last -%}
                 {% assign for_count = forloop.length -%}
             {% endif -%}
-            "path": {{ question.path | jsonify }},
-            "name": {{ question.name | jsonify }},
-            "excerpt": {{ question.excerpt | strip_html | normalize_whitespace | strip | jsonify }},
-            "type": {{ question.type | jsonify }},
-            "sourceUrl": "{{ question.url | absolute_url }}",
-            "webUrl": "{{ site.webUrl }}{{ question.path | replace: '_questions/','/questions?id=' | replace: '.md','' }}",
-            "heat": {{ question.heat | default: 0 | jsonify }},
-            {% if question.provider -%}
+            "path": {{ challenge.path | jsonify }},
+            "name": {{ challenge.name | jsonify }},
+            "excerpt": {{ challenge.excerpt | strip_html | normalize_whitespace | strip | jsonify }},
+            "type": {{ challenge.type | jsonify }},
+            "sourceUrl": "{{ challenge.url | absolute_url }}",
+            "webUrl": "{{ site.webUrl }}{{ challenge.path | replace: '_challenges/','/challenges?id=' | replace: '.md','' }}",
+            "heat": {{ challenge.heat | default: 0 | jsonify }},
+            {% if challenge.provider -%}
             "provider": {
-                {% if question.provider.domain -%}
-                "domain": "{{ question.provider.domain }}",
+                {% if challenge.provider.domain -%}
+                "domain": "{{ challenge.provider.domain }}",
                 {% endif -%}
-                {% if question.provider.images -%}
+                {% if challenge.provider.images -%}
                 "images": [
-                    {% for image in question.provider.images -%}
+                    {% for image in challenge.provider.images -%}
                     {
                         "url": "{{ image.url | absolute_url }}",
                         "width": {{ image.width | default: 0 }},
@@ -37,11 +37,11 @@
                     {% endfor %}
                 ],
                 {% endif -%}
-                "name": {{ question.provider.name | jsonify }}
+                "name": {{ challenge.provider.name | jsonify }}
             },
             {% endif -%}
             "images": [
-                {% for image in question.images -%}
+                {% for image in challenge.images -%}
                 {
                     "width": {{ image.width | default: 0 }},
                     "height": {{ image.height | default: 0 }},
@@ -52,8 +52,8 @@
                 }{% unless forloop.last -%},{% endunless %}
                 {% endfor %}
             ],
-            "locale": {{ question.locale | default: site.locale | jsonify }},
-            "topics": {{ question.topics | jsonify }}
+            "locale": {{ challenge.locale | default: site.locale | jsonify }},
+            "topics": {{ challenge.topics | jsonify }}
         }{% unless forloop.last -%},{% endunless %}
         {% endfor %}
     ],
