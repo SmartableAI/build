@@ -53,6 +53,7 @@
                 {% endfor %}
             ],
             "locale": {{ challenge.locale | default: site.locale | jsonify }},
+            "levels": {{ challenge.levels | jsonify }},
             "topics": {{ challenge.topics | jsonify }}
         }{% unless forloop.last -%},{% endunless %}
         {% endfor %}
