@@ -15,7 +15,7 @@
                 {% assign for_count = forloop.length -%}
             {% endif -%}
             "path": {{ challenge.path | jsonify }},
-            "name": {{ challenge.name | jsonify }},
+            "title": {{ challenge.title | jsonify }},
             "excerpt": {{ challenge.excerpt | strip_html | normalize_whitespace | strip | jsonify }},
             "type": {{ challenge.type | jsonify }},
             "sourceUrl": "{{ challenge.url | absolute_url }}",
