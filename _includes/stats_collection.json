@@ -88,6 +88,7 @@
                             "height": {{ image.height | default: 0 }},
                             "quality": {{ image.quality | default: 100 }},
                             "url": "{{ image.url | absolute_url }}",
+                            "isCached": {{ image.isCached | default: false }},
                             "attribution": {{ image.attribution | jsonify }},
                             "title": {{ image.title | jsonify }}
                         }{% unless forloop.last -%},{% endunless %}
@@ -137,6 +138,7 @@
                     "height": {{ image.height | default: 0 }},
                     "quality": {{ image.quality | default: 100 }},
                     "url": "{{ image.url | absolute_url }}",
+                    "isCached": {{ image.isCached | default: false }},
                     "attribution": {{ image.attribution | jsonify }},
                     "title": {{ image.title | jsonify }}
                 }{% unless forloop.last -%},{% endunless %}
