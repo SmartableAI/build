@@ -37,43 +37,14 @@
             {% if forloop.last -%}
                 {% assign for_count = forloop.length -%}
             {% endif -%}
+            "title": {{ item.title | jsonify }},
+            "excerpt": {{ item.excerpt | strip_html | normalize_whitespace | strip | jsonify }},
             "path": {{ item.path | jsonify }},
             "type": {{ item.type | jsonify }},
             "sourceUrl": "{{ item.url | absolute_url }}",
-            "webUrl": "{{ site.webUrl }}{{ item.path | replace: '_samples/','/samples?id=' | replace: '.md','' }}",
+            "webUrl": "{{ item.webUrl | absolute_url }}",
             "heat": {{ item.heat | default: 0 }},
-            {% if item.type == "profile" -%}
-            "name": {{ item.name | jsonify }},
-            "overview": {{ item.overview | strip_html | normalize_whitespace | strip | jsonify }},
-            {% if item.website -%}
-            "website": "{{ item.website | absolute_url }}",
-            {% endif -%}
-            {% if item.linkedin -%}
-            "linkedin": {
-                "url": "{{ item.linkedin.url | absolute_url }}",
-                "followers": {{ item.linkedin.followers }}
-            },
-            {% endif -%}
-            {% if item.twitter -%}
-            "twitter": {
-                "username": {{ item.twitter.username | jsonify }},
-                "url": "{{ item.twitter.url | absolute_url }}",
-                "followers": {{ item.twitter.followers | default: 0 }}
-            },
-            {% endif -%}
-            {% if item.crunchbase -%}
-            "crunchbase": {
-                "url": "{{ item.crunchbase.url | absolute_url }}"
-            },
-            {% endif -%}
-            "size": "{{ item.size }}",
-            {% if item.yearFounded > 1500 -%}
-            "yearFounded": {{ item.yearFounded }},
-            {% endif -%}
-            "locations": {{ item.locations | jsonify }},
-            {% elsif item.type == "collection" -%}
-            "title": {{ item.title | jsonify }},
-            "excerpt": {{ item.excerpt | strip_html | normalize_whitespace | strip | jsonify }},
+            {% if item.type == "collection" -%}
             "topItems": [
             {% if item.items -%}
                 {% assign child_items = "" | split: ',' -%}
@@ -89,17 +60,12 @@
             {% endif -%}
             {% for child_item in child_items limit:4 -%}
                 {
-                    "path": {{ child_item.path | jsonify }},
-                    "type": {{ child_item.type | jsonify }},
-                    {% if child_item.type == "profile" -%}
-                    "name": {{ child_item.name | jsonify }},
-                    "overview": {{ child_item.overview | strip_html | normalize_whitespace | strip | jsonify }},
-                    {% elsif child_item.type == "collection" -%}
                     "title": {{ child_item.title | jsonify }},
                     "excerpt": {{ child_item.excerpt | strip_html | normalize_whitespace | strip | jsonify }},
-                    {% endif -%}
+                    "path": {{ child_item.path | jsonify }},
+                    "type": {{ child_item.type | jsonify }},
                     "sourceUrl": "{{ child_item.url | absolute_url }}",
-                    "webUrl": "{{ site.webUrl }}{{ child_item.path | replace: '_samples/','/samples?id=' | replace: '.md','' }}",
+                    "webUrl": "{{ item.webUrl | absolute_url }}",
                     "heat": {{ child_item.heat | default: 0 }},
                     "images": [
                         {% for image in child_item.images -%}
