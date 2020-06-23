@@ -40,7 +40,7 @@
             "path": {{ item.path | jsonify }},
             "type": {{ item.type | jsonify }},
             "sourceUrl": "{{ item.url | absolute_url }}",
-            "webUrl": "{{ site.webUrl }}{{ item.path | replace: '_people/','/people?id=' | replace: '.md','' }}",
+            "webUrl": "{{ site.webUrl }}{{ item.path | replace: '_people/','/people/' | replace: '.md','' }}",
             "heat": {{ item.heat | default: 0 }},
             {% if item.type == "profile" -%}
             "name": {{ item.name | jsonify }},
@@ -101,7 +101,7 @@
                     "excerpt": {{ child_item.excerpt | strip_html | normalize_whitespace | strip | jsonify }},
                     {% endif -%}
                     "sourceUrl": "{{ child_item.url | absolute_url }}",
-                    "webUrl": "{{ site.webUrl }}{{ child_item.path | replace: '_people/','/people?id=' | replace: '.md','' }}",
+                    "webUrl": "{{ site.webUrl }}{{ child_item.path | replace: '_people/','/people/' | replace: '.md','' }}",
                     "heat": {{ child_item.heat | default: 0 }},
                     "images": [
                         {% for image in child_item.images -%}
