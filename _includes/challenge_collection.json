@@ -19,7 +19,7 @@
             "excerpt": {{ challenge.excerpt | strip_html | normalize_whitespace | strip | jsonify }},
             "type": {{ challenge.type | jsonify }},
             "sourceUrl": "{{ challenge.url | absolute_url }}",
-            "webUrl": "{{ site.webUrl }}{{ challenge.path | replace: '_challenges/','/challenges?id=' | replace: '.md','' }}",
+            "webUrl": "{{ site.webUrl }}{{ challenge.path | replace: '_challenges/','/challenge/' | replace: '.md','' }}",
             "heat": {{ challenge.heat | default: 0 | jsonify }},
             {% if challenge.provider -%}
             "provider": {
