@@ -86,13 +86,14 @@
             ],
             "size": {{ child_items | size }},
             {% endif -%}
-            {% if item.downloads -%}
-            "downloads": [
-                {% for download in item.downloads -%}
+            {% if item.actions -%}
+            "actions": [
+                {% for action in item.actions -%}
                 {
-                    "url": "{{ download.url | absolute_url }}",
-                    "attribution": {{ download.attribution | jsonify }},
-                    "title": {{ download.title | jsonify }}
+                    "url": "{{ action.url | absolute_url }}",
+                    "type": {{ action.type | jsonify }},
+                    "title": {{ action.title | jsonify }},
+                    "attribution": {{ action.attribution | jsonify }}
                 }{% unless forloop.last -%},{% endunless %}
                 {% endfor %}
             ],

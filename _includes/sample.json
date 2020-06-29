@@ -5,13 +5,14 @@
     "title": {{ page.title | jsonify }},
     "excerpt": {{ page.excerpt | strip_html | normalize_whitespace | strip | jsonify }},
     "content": {{ content | jsonify }},
-    {% if page.downloads -%}
-    "downloads": [
-        {% for download in page.downloads -%}
+    {% if page.actions -%}
+    "actions": [
+        {% for action in page.actions -%}
         {
-            "url": "{{ download.url | absolute_url }}",
-            "attribution": {{ download.attribution | jsonify }},
-            "title": {{ download.title | jsonify }}
+            "url": "{{ action.url | absolute_url }}",
+            "type": {{ action.type | jsonify }},
+            "title": {{ action.title | jsonify }},
+            "attribution": {{ action.attribution | jsonify }}
         }{% unless forloop.last -%},{% endunless %}
         {% endfor %}
     ],
@@ -24,8 +25,8 @@
             "quality": {{ image.quality | default: 100 }},
             "isCached": {{ image.isCached | default: false }},
             "url": "{{ image.url | absolute_url }}",
-            "attribution": {{ image.attribution | jsonify }},
-            "title": {{ image.title | jsonify }}
+            "title": {{ image.title | jsonify }},
+            "attribution": {{ image.attribution | jsonify }}
         }{% unless forloop.last -%},{% endunless %}
         {% endfor %}
     ],
