@@ -43,6 +43,7 @@
             "type": {{ item.type | jsonify }},
             "sourceUrl": "{{ item.url | absolute_url }}",
             "webUrl": "{{ item.webUrl | absolute_url }}",
+            "originalUrl": "{{ item.originalUrl | absolute_url }}",
             "heat": {{ item.heat | default: 0 }},
             {% if item.type == "collection" -%}
             "topItems": [
@@ -65,7 +66,8 @@
                     "path": {{ child_item.path | jsonify }},
                     "type": {{ child_item.type | jsonify }},
                     "sourceUrl": "{{ child_item.url | absolute_url }}",
-                    "webUrl": "{{ item.webUrl | absolute_url }}",
+                    "webUrl": "{{ child_item.webUrl | absolute_url }}",
+                    "originalUrl": "{{ child_item.originalUrl | absolute_url }}",
                     "heat": {{ child_item.heat | default: 0 }},
                     "images": [
                         {% for image in child_item.images -%}
