@@ -4,6 +4,9 @@
     "heat": {{ page.heat | default: 0 }},
     "title": {{ page.title | jsonify }},
     "excerpt": {{ page.excerpt | strip_html | normalize_whitespace | strip | jsonify }},
+    {% if page.featuredContent -%}
+    "featuredContent": {{ page.featuredContent | jsonify }},
+    {% endif -%}
     "content": {{ content | jsonify }},
     {% if page.actions -%}
     "actions": [
