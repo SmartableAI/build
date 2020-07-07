@@ -76,7 +76,7 @@
                     "excerpt": {{ child_item.excerpt | strip_html | normalize_whitespace | strip | jsonify }},
                     "sourceUrl": "{{ child_item.url | absolute_url }}",
                     {% if child_item.type == "collection" or child_item.webUrl == blank -%}
-                    "webUrl": "{{ site.webUrl }}{{ child_item.path | replace: '_learning/','/learning?id=' | replace: '.md','' }}",
+                    "webUrl": "{{ site.webUrl }}{{ child_item.path | replace: '_learning/','/learning/' | replace: '.md','' }}",
                     {% else -%}
                     "webUrl": "{{ child_item.webUrl | absolute_url }}",
                     {% endif -%}
