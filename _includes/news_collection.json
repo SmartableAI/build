@@ -24,12 +24,16 @@
             "type": {{ post.type | jsonify }},
             "heat": {{ post.heat | default: 0 }},
             "sourceUrl": "{{ post.url | absolute_url }}",
-            "webUrl": "{{ post.webUrl | absolute_url }}",
+            {% if item.type == "collection" or item.webUrl == blank -%}
+            "webUrl": "{{ site.webUrl }}{{ item.path | replace: '_news/','/news/' | replace: '.md','' }}",
+            {% else -%}
+            "webUrl": "{{ item.webUrl | absolute_url }}",
             {% if post.ampWebUrl -%}
             "ampWebUrl": "{{ post.ampWebUrl | absolute_url }}",
             {% endif -%}
             {% if post.cdnAmpWebUrl -%}
             "cdnAmpWebUrl": "{{ post.cdnAmpWebUrl | default: "" | absolute_url }}",
+            {% endif -%}
             {% endif -%}
             "excerpt": {{ post.excerpt | strip_html | normalize_whitespace | strip | jsonify }},
             "publishedDateTime": {{ post.publishedDateTime | jsonify }},
