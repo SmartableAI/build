@@ -16,6 +16,18 @@
         "followers": {{ page.twitter.followers | default: 0 }}
     },
     {% endif -%}
+    {% if page.youtube -%}
+    "youtube": {
+        "url": "{{ page.youtube.url | absolute_url }}",
+        "subscribers": {{ page.youtube.subscribers | default: 0 }}
+    },
+    {% endif -%}
+    {% if page.twitch -%}
+    "twitch": {
+        "url": "{{ page.twitch.url | absolute_url }}",
+        "followers": {{ page.twitch.followers | default: 0 }}
+    },
+    {% endif -%}
     {% if page.linkedin -%}
     "linkedin": {
         "url": "{{ page.linkedin.url | absolute_url }}"
