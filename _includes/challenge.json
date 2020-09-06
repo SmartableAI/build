@@ -37,5 +37,7 @@
         {% endfor %}
     ],
     "locale": {{ page.locale | default: site.locale | jsonify }},
-    "topics": {{ page.topics | jsonify }}
+    "levels": {{ page.levels | jsonify }},
+    "topics": {{ page.topics | jsonify }},
+    "tags": {{ page.tags | jsonify }}
 }

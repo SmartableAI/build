@@ -55,7 +55,8 @@
             ],
             "locale": {{ challenge.locale | default: site.locale | jsonify }},
             "levels": {{ challenge.levels | jsonify }},
-            "topics": {{ challenge.topics | jsonify }}
+            "topics": {{ challenge.topics | jsonify }},
+            "tags": {{ challenge.tags | jsonify }}
         }{% unless forloop.last -%},{% endunless %}
         {% endfor %}
     ],
